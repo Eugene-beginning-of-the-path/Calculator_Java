@@ -7,7 +7,7 @@ public class Main
 
     public static void main(String[] args)
     {
-        System.out.println(calc("7-3"));
+        System.out.println(calc("4 - 3"));
     }
 
     public static String calc(String input)
@@ -26,6 +26,7 @@ public class Main
          * x > 0 && x < 10
          * Is processing main logic of calculator
          */
+
         String[] str = input.split(" ");
         for (int i = 0, j = 0; i < 3; i+=2, j++)
         {
@@ -100,7 +101,7 @@ public class Main
          */
         if (arr[0] < 0 || arr[0] > 10 || arr[1] < 0 || arr[1] > 10)
         {
-            System.out.println("Onf of the two values is > 10 or < 0");
+            System.out.println("One of the two values is > 10 or < 0");
             return false;
         }
 
