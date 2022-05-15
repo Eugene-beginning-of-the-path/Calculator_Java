@@ -7,18 +7,30 @@ public class Main
 
     public static void main(String[] args)
     {
-        System.out.println(calc("4 - 3"));
+        System.out.println(calc("1 + 2 + 3"));
     }
 
     public static String calc(String input)
     {
         checkString(input);
-        mainCalculationLogic(input);
-        return String.valueOf(result);
 
+        int unicode = 48;
+        while (unicode != 57) //if values of the string has Arabic numbers --> call method for calculation Arabic
+                              //numbers
+        {
+            if (input.indexOf(unicode) >= 0)
+            {
+                ArabicCalculationLogic(input);
+                return String.valueOf(result);
+            }
+
+            unicode++;
+        }
+        RomanCalculationLogic(input);
+        return String.valueOf(result);
     }
 
-    public static void mainCalculationLogic(String input)
+    public static void ArabicCalculationLogic(String input)
     {
         /**
          * Splitting a string into numbers
@@ -54,6 +66,67 @@ public class Main
         }
     }
 
+    public static void RomanCalculationLogic(String input)
+    {
+        String[] str = input.split(" ");
+        int value1 = 0, value2 = 0;
+        char[] symbol = str[0].toCharArray();
+        //int[] value = new int[symbol.length];
+        for (int i = 0; i < symbol.length; i++)
+        {
+            switch (symbol[i])
+            {
+                case 'I':
+                    value1 += 1;
+                    break;
+
+                case 'V':
+                    value1 += 5;
+                    break;
+
+                case 'X':
+                    value1 += 10;
+            }
+        }
+
+        symbol = str[2].toCharArray();
+        for (int i = 0; i < symbol.length; i++)
+        {
+            switch (symbol[i])
+            {
+                case 'I':
+                    value2 += 1;
+                    break;
+
+                case 'V':
+                    value2 += 5;
+                    break;
+
+                case 'X':
+                    value2 += 10;
+            }
+        }
+
+        switch (str[1]) //str[1] keeps a mathematical operation
+        {
+            case "+":
+                result = value1 + value2;
+                break;
+
+            case "-":
+                result = value1 - value2;
+                break;
+
+            case "*":
+                result = value1 * value2;
+                break;
+
+            case "/":
+                result = value1 / value2;
+                break;
+        }
+    }
+
     private static boolean checkString(String input)
     {
         /**
@@ -70,9 +143,9 @@ public class Main
         { //if the line has a float number or an empty value(-es)
             String[] splited = input.split(" ");
 
-            if (splited[0] == "" || splited.length < 3) //if "7 + " or " + 7"
+            if (splited[0] == "" || splited.length < 3 || splited.length > 3) //if "7 + " or " + 7"
             {
-                System.out.println("The mathematical expression has an empty value(-es)");
+                System.out.println("The mathematical expression has an empty value(-es) or expression has 3 numbers");
                 return false;
             }
 
