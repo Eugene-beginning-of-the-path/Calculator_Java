@@ -5,7 +5,10 @@ import java.util.Scanner;
 public class Main
 {
     static int[] arrOfNumbers = new int[2]; //it will be saving two value for calculation
-    static int result;  //it will be saving result after operation for two values
+    static int result;  //it will be saving result of arabic value
+                        // after operation for two values
+    static String resultRoman; //it will be saving result of roman value
+                               // after operation for two values
 
     public static void main(String[] args) throws InputStrException
     {
@@ -35,7 +38,7 @@ public class Main
             unicode++;
         }
         RomanCalculationLogic(input);
-        return String.valueOf(result);
+        return resultRoman;
     }
 
     public static void ArabicCalculationLogic(String input) throws InputStrException
@@ -146,6 +149,88 @@ public class Main
 
         if (result <= 0)
             throw new InputStrException("A negative result of roman value");
+
+        String temp = String.valueOf(result);
+        char[] resultToRoman = temp.toCharArray();
+        String resultStr = "";
+        if (result == 100)
+        {
+            resultStr += 'C';
+            resultRoman = resultStr;
+            return;
+        }
+
+        for (int i = 0; i < resultToRoman.length; i++)
+        {
+            if (i == 0)
+            {
+                switch (resultToRoman[i])
+                {
+                    case '1':
+                        resultStr += 'I';
+                        break;
+                    case '2':
+                        resultStr += "II";
+                        break;
+                    case '3':
+                        resultStr += "III";
+                        break;
+                    case '4':
+                        resultStr += "IV";
+                        break;
+                    case '5':
+                        resultStr += 'V';
+                        break;
+                    case '6':
+                        resultStr += "VI";
+                        break;
+                    case '7':
+                        resultStr += "VII";
+                        break;
+                    case '8':
+                        resultStr += "VIII";
+                        break;
+                    case '9':
+                        resultStr += "IX";
+                        break;
+                }
+            }
+
+            if (i == 1)
+            {
+                switch (resultToRoman[i])
+                {
+                    case '1':
+                        resultStr += 'X';
+                        break;
+                    case '2':
+                        resultStr += "XX";
+                        break;
+                    case '3':
+                        resultStr += "XXX";
+                        break;
+                    case '4':
+                        resultStr += "XL";
+                        break;
+                    case '5':
+                        resultStr += 'L';
+                        break;
+                    case '6':
+                        resultStr += "LX";
+                        break;
+                    case '7':
+                        resultStr += "LXXX";
+                        break;
+                    case '8':
+                        resultStr += "IIC";
+                        break;
+                    case '9':
+                        resultStr += "IC";
+                        break;
+                }
+            }
+        }
+        resultRoman = resultStr;
     }
 
     private static void checkString(String input) throws InputStrException
